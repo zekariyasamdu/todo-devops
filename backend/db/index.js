@@ -1,12 +1,13 @@
-const pgp = require("pg-promise")();
+const { drizzle } = require("drizzle-orm/node-postgres");
+const pg = require("pg");
 
-const DB_USER = process.env.DB_USERNAME;
-const DB_PASSWORD = process.env.DB_PASSWORD;
-const DB_NAME = process.env.DB_NAME;
-const DB_HOST = process.env.DB_HOST;
-const DB_PORT = process.env.DB_PORT;
+const pool = new pg.Pool({
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  user: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+});
 
-const db = pgp(
-  `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`,
-);
-module.exports = db;
+const db = drizzle(pool);
+module.exports = { db };

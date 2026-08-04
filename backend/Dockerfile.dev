@@ -1,0 +1,18 @@
+FROM node:22-alpine
+
+WORKDIR /usr/src/app
+
+# Copy dependency files first
+COPY package*.json ./
+
+# Install all dependencies (including devDependencies like nodemon)
+RUN npm install
+
+# Copy the rest of the application source code
+COPY . .
+
+# Expose your Express port (change 5000 to match your app's port)
+EXPOSE 5000
+
+# Start Express using the nodemon script
+CMD ["npm", "run", "dev"]

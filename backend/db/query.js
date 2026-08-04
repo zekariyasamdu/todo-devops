@@ -1,14 +1,25 @@
-const db = require("./index.js");
+const { db } = require("./index");
+const { sql } = require("drizzle-orm");
 
 async function SELECT_COUNT() {
-  const data = db.one("SELECT count from count;");
-  return data;
+  const result = await db.execute(sql`
+    SELECT count
+    FROM count
+    LIMIT 1
+  `);
+
+  return result.rows[0];
 }
 
 async function CHANGE_COUNT(num) {
-  const data = db.one(
-    `UPDATE count SET count = ${num} WHERE id = (SELECT MIN(id) FROM count);`,
-  );
-  return data;
+  await db.execute(sql`
+    UPDATE count
+    SET count = ${num}
+    WHERE id = (SELECT MIN(id) FROM count)
+  `);
 }
-module.exports = { SELECT_COUNT, CHANGE_COUNT };
+
+module.exports = {
+  SELECT_COUNT,
+  CHANGE_COUNT,
+};
