@@ -29,7 +29,9 @@ jobs:
         uses: google-github-actions/auth@v2
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
-
+          # Create the service account
+          # Grant it permission to push images to Artifact Registry
+          # Generate the JSON key file
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
 
