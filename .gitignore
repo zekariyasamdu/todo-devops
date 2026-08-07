@@ -1,1 +1,5 @@
+# environment variables (secrets, DB URLs, etc — never commit these)
 .env
+.env.local
+.env.*.local
+
