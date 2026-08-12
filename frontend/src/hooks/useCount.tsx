@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useCountValue } from "./useCountValue";
+const API_URL = import.meta.env.VITE_API_URL;
 
 export function useCount() {
   const [loading, setLoading] = useState(false);
@@ -11,7 +12,7 @@ export function useCount() {
   useEffect(() => {
     async function route() {
       setLoading(true);
-      await fetch(`http://localhost:3000/count/${count}`, {
+      await fetch(`${API_URL}/count/${count}`, {
         method: "PUT",
       });
       setLoading(false);

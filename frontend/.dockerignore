@@ -2,5 +2,8 @@ node_modules
 build
 dist
 .git
+.env
+.env.local
+!.env.production
 .gitignore
 npm-debug.log
