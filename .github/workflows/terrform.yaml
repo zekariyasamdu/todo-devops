@@ -1,0 +1,11 @@
+name: Pull form Atrifact Registry and delpoy
+
+on:
+  workflow_run:
+    workflows: ["CI"]
+    types: [completed]
+    branches: [docker]
+
+env:
+
+jobs:
