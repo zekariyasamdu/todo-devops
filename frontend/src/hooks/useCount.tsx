@@ -10,6 +10,7 @@ export function useCount() {
     setCount(countValue);
   }, [countLoading]);
   useEffect(() => {
+    if (count === "") return;
     async function route() {
       setLoading(true);
       await fetch(`${API_URL}/count/${count}`, {
