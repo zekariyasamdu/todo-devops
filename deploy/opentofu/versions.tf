@@ -1,5 +1,9 @@
 terraform {
   required_version = ">= 1.6"
+  backend "gcs" {
+    bucket = "zach-training-area-tfstate"
+    prefix = "devops-todo"
+  }
 
   required_providers {
     google = {

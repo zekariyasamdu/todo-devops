@@ -1,11 +1,45 @@
-name: Pull form Atrifact Registry and delpoy
+name: Deploy Infrastructure
 
 on:
   workflow_run:
-    workflows: ["CI"]
+    workflows: ["Build and Push to Artifact Registry"]
     types: [completed]
-    branches: [docker]
+    branches: [main]
 
 env:
+  TF_VAR_image_tag: ${{ github.event.workflow_run.head_sha }}
 
 jobs:
+  deploy:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    defaults:
+      run:
+        working-directory: ./deploy/opentofu
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_TOFU_SA_KEY }}
+
+      - name: Set up OpenTofu
+        uses: opentofu/setup-opentofu@v1
+        with:
+          tofu_version: 1.8.0
+
+      - name: Tofu Init
+        run: tofu init
+
+      - name: Tofu Plan
+        run: tofu plan -out=tfplan
+
+      - name: Tofu Apply
+        run: tofu apply -auto-approve tfplan
