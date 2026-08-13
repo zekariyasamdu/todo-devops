@@ -8,6 +8,7 @@ on:
 
 env:
   TF_VAR_image_tag: ${{ github.event.workflow_run.head_sha }}
+  TF_VAR_project_id: ${{ secrets.GCP_PROJECT_ID }}
 
 jobs:
   deploy:
