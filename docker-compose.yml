@@ -16,14 +16,17 @@ services:
   backend:
     build:
       context: .
-      dockerfile: backend/Dockerfile.dev
+      dockerfile: Dockerfile
+      target: dev
+      args:
+        APP_NAME: api
     container_name: express_backend
     ports:
       - "3000:3000"
     volumes:
-      - .:/repo
-      - /repo/node_modules
-    working_dir: /repo/backend
+      - .:/app
+      - /app/node_modules
+    working_dir: /app/apps/api
     environment:
       - NODE_ENV=${NODE_ENV}
       - DB_USERNAME=${DB_USERNAME}
@@ -40,14 +43,17 @@ services:
   frontend:
     build:
       context: .
-      dockerfile: frontend/Dockerfile.dev
+      dockerfile: Dockerfile
+      target: dev
+      args:
+        APP_NAME: web
     container_name: react_frontend
     ports:
       - "8080:5173"
     volumes:
-      - .:/repo
-      - /repo/node_modules
-    working_dir: /repo/frontend
+      - .:/app
+      - /app/node_modules
+    working_dir: /app/apps/web
     environment:
       - CHOKIDAR_USEPOLLING=true
       - VITE_API_URL=http://localhost:3000
@@ -58,7 +64,6 @@ services:
 
 volumes:
   pgdata:
-
 networks:
   app-network:
     driver: bridge

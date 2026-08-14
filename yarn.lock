@@ -1373,6 +1373,26 @@ __metadata:
   languageName: node
   linkType: hard
 
+"api@workspace:apps/api":
+  version: 0.0.0-use.local
+  resolution: "api@workspace:apps/api"
+  dependencies:
+    cookie-parser: "npm:~1.4.4"
+    cors: "npm:^2.8.6"
+    debug: "npm:~2.6.9"
+    dotenv: "npm:^17.4.2"
+    drizzle-kit: "npm:^0.31.10"
+    drizzle-orm: "npm:^0.45.2"
+    express: "npm:~4.16.1"
+    http-errors: "npm:~1.6.3"
+    jade: "npm:~1.11.0"
+    morgan: "npm:~1.9.1"
+    nodemon: "npm:^3.1.14"
+    pg: "npm:^8.22.0"
+    pg-promise: "npm:^12.7.0"
+  languageName: unknown
+  linkType: soft
+
 "array-flatten@npm:1.1.1":
   version: 1.1.1
   resolution: "array-flatten@npm:1.1.1"
@@ -1402,26 +1422,6 @@ __metadata:
   checksum: 10c0/9406267ada8d7dbdfe8906b40ecadb816a5f4cee2922bee23f7729293b369624ee135b5a9b0f263851c263c9787522ac5d97016c9a2b82d1668300e42b18aff8
   languageName: node
   linkType: hard
-
-"backend@workspace:backend":
-  version: 0.0.0-use.local
-  resolution: "backend@workspace:backend"
-  dependencies:
-    cookie-parser: "npm:~1.4.4"
-    cors: "npm:^2.8.6"
-    debug: "npm:~2.6.9"
-    dotenv: "npm:^17.4.2"
-    drizzle-kit: "npm:^0.31.10"
-    drizzle-orm: "npm:^0.45.2"
-    express: "npm:~4.16.1"
-    http-errors: "npm:~1.6.3"
-    jade: "npm:~1.11.0"
-    morgan: "npm:~1.9.1"
-    nodemon: "npm:^3.1.14"
-    pg: "npm:^8.22.0"
-    pg-promise: "npm:^12.7.0"
-  languageName: unknown
-  linkType: soft
 
 "balanced-match@npm:^4.0.2":
   version: 4.0.4
@@ -2507,31 +2507,6 @@ __metadata:
   checksum: 10c0/c6d27f3ed86cc5b601404822f31c900dd165ba63fff8152a3ef714e2012e7535027063bc67ded4cb5b3a49fa596495d46cacd9f47d6328459cf570f08b7d9e5a
   languageName: node
   linkType: hard
-
-"frontend@workspace:frontend":
-  version: 0.0.0-use.local
-  resolution: "frontend@workspace:frontend"
-  dependencies:
-    "@babel/core": "npm:^7.29.7"
-    "@eslint/js": "npm:^10.0.1"
-    "@rolldown/plugin-babel": "npm:^0.2.3"
-    "@types/babel__core": "npm:^7.20.5"
-    "@types/node": "npm:^24.13.2"
-    "@types/react": "npm:^19.2.17"
-    "@types/react-dom": "npm:^19.2.3"
-    "@vitejs/plugin-react": "npm:^6.0.3"
-    babel-plugin-react-compiler: "npm:^1.0.0"
-    eslint: "npm:^10.6.0"
-    eslint-plugin-react-hooks: "npm:^7.1.1"
-    eslint-plugin-react-refresh: "npm:^0.5.3"
-    globals: "npm:^17.7.0"
-    react: "npm:^19.2.7"
-    react-dom: "npm:^19.2.7"
-    typescript: "npm:~6.0.2"
-    typescript-eslint: "npm:^8.62.0"
-    vite: "npm:^8.1.1"
-  languageName: unknown
-  linkType: soft
 
 "fsevents@npm:~2.3.2, fsevents@npm:~2.3.3":
   version: 2.3.3
@@ -4168,6 +4143,31 @@ __metadata:
   checksum: 10c0/23b4f35bbeabcaa5c87a9f638ae80862a9313dccbaa8973b0eada81dbe97488ae11baf4d8aa2846bc397d31456afdfd8d791bb44c542f83735e6d04af6996f4d
   languageName: node
   linkType: hard
+
+"web@workspace:apps/web":
+  version: 0.0.0-use.local
+  resolution: "web@workspace:apps/web"
+  dependencies:
+    "@babel/core": "npm:^7.29.7"
+    "@eslint/js": "npm:^10.0.1"
+    "@rolldown/plugin-babel": "npm:^0.2.3"
+    "@types/babel__core": "npm:^7.20.5"
+    "@types/node": "npm:^24.13.2"
+    "@types/react": "npm:^19.2.17"
+    "@types/react-dom": "npm:^19.2.3"
+    "@vitejs/plugin-react": "npm:^6.0.3"
+    babel-plugin-react-compiler: "npm:^1.0.0"
+    eslint: "npm:^10.6.0"
+    eslint-plugin-react-hooks: "npm:^7.1.1"
+    eslint-plugin-react-refresh: "npm:^0.5.3"
+    globals: "npm:^17.7.0"
+    react: "npm:^19.2.7"
+    react-dom: "npm:^19.2.7"
+    typescript: "npm:~6.0.2"
+    typescript-eslint: "npm:^8.62.0"
+    vite: "npm:^8.1.1"
+  languageName: unknown
+  linkType: soft
 
 "which@npm:^2.0.1":
   version: 2.0.2
