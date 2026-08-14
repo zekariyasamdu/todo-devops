@@ -1,20 +1,26 @@
 FROM node:22-alpine AS builder
-WORKDIR /usr/src/app
+WORKDIR /repo
 
-COPY package*.json ./
-RUN npm ci --omit=dev
+RUN corepack enable
 
-COPY . .
+COPY package.json yarn.lock .yarnrc.yml ./
+COPY backend/package.json ./backend/
+COPY frontend/package.json ./frontend/
+
+RUN yarn install --immutable
+
+COPY backend ./backend
 
 FROM node:22-alpine
-WORKDIR /usr/src/app
+WORKDIR /repo
 
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 
-COPY --from=builder --chown=appuser:appgroup /usr/src/app ./
+COPY --from=builder --chown=appuser:appgroup /repo ./
 
 ENV NODE_ENV=production
 EXPOSE 3000
 
 USER appuser
+WORKDIR /repo/backend
 CMD ["node", "bin/www"]
