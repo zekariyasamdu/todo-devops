@@ -1,11 +1,15 @@
 name: Deploy Infrastructure
 
+# This workflow is triggered when the "Build and Push to Artifact Registry"
+# workflow completes successfully on the main branch.
 on:
   workflow_run:
     workflows: ["Build and Push to Artifact Registry"]
     types: [completed]
     branches: [main]
 
+# defining global envs using variables
+# TF_VAR_ prefix has special meaning in OpenTofu, it is used to pass variables to the Terraform configuration.
 env:
   TF_VAR_image_tag: ${{ github.event.workflow_run.head_sha }}
   TF_VAR_project_id: ${{ secrets.GCP_PROJECT_ID }}
@@ -26,6 +30,7 @@ jobs:
         with:
           ref: ${{ github.event.workflow_run.head_sha }}
 
+        # The credentials_json contians a credentials for a service account with the required permissions to deploy images to cloud run.
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v2
         with:

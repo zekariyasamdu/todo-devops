@@ -23,5 +23,11 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
 
+      # - name: Lint check web and api
+      #   run: yarn workspace web lint & yarn workspace api lint
+      #
+      # - name: Format check web and api
+      #   run: yarn workspace api format:check & yarn workspace web format:check
+
       - name: Build frontend
         run: yarn workspace web build

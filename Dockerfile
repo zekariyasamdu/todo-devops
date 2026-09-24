@@ -1,7 +1,6 @@
 FROM node:22-alpine AS base
 RUN apk update && apk upgrade && \
     apk add --no-cache dumb-init && \
-    rm -rf /var/cache/apk/* && \
     corepack enable && \
     corepack prepare yarn@4.5.0 --activate && \
     addgroup -g 1001 -S nodejs && adduser -S appuser -u 1001 -G nodejs
@@ -13,7 +12,7 @@ COPY apps ./apps
 RUN yarn install
 
 FROM base AS builder
-ARG APP_NAME
+ARG APP_NAME=web
 WORKDIR /app
 COPY --from=deps /app ./
 RUN yarn workspace ${APP_NAME} run build 
