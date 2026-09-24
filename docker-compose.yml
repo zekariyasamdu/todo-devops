@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   postgres-db:
     image: postgres:16-alpine
@@ -17,14 +15,18 @@ services:
 
   backend:
     build:
-      context: ./backend
-      dockerfile: Dockerfile.dev
+      context: .
+      dockerfile: Dockerfile
+      target: dev
+      args:
+        APP_NAME: api
     container_name: express_backend
     ports:
       - "3000:3000"
     volumes:
-      - ./backend:/usr/src/app
-      - /usr/src/app/node_modules
+      - .:/app
+      - /app/node_modules
+    working_dir: /app/apps/api
     environment:
       - NODE_ENV=${NODE_ENV}
       - DB_USERNAME=${DB_USERNAME}
@@ -40,14 +42,18 @@ services:
 
   frontend:
     build:
-      context: ./frontend
-      dockerfile: Dockerfile.dev
+      context: .
+      dockerfile: Dockerfile
+      target: dev
+      args:
+        APP_NAME: web
     container_name: react_frontend
     ports:
       - "8080:5173"
     volumes:
-      - ./frontend:/app
+      - .:/app
       - /app/node_modules
+    working_dir: /app/apps/web
     environment:
       - CHOKIDAR_USEPOLLING=true
       - VITE_API_URL=http://localhost:3000
@@ -58,7 +64,6 @@ services:
 
 volumes:
   pgdata:
-
 networks:
   app-network:
     driver: bridge
