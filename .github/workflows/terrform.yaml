@@ -22,7 +22,7 @@ jobs:
       contents: read
     defaults:
       run:
-        working-directory: ./deploy/opentofu
+        working-directory: ./deploy/opentofu # For every `run` command in this job, pretend we're already inside ./deploy/opentofu.
 
     steps:
       - name: Checkout repo
@@ -35,17 +35,21 @@ jobs:
         uses: google-github-actions/auth@v2
         with:
           credentials_json: ${{ secrets.GCP_TOFU_SA_KEY }}
-
+        # This installs OpenTofu
       - name: Set up OpenTofu
         uses: opentofu/setup-opentofu@v1
         with:
           tofu_version: 1.8.0
 
+        # This installs OpenTofu
+        # It initializes things like: providers, backend/state configuration, modules dependency information
       - name: Tofu Init
         run: tofu init
 
+        # review they changes that will be applied to the infrastructure and save them to a plan file called tfplan
       - name: Tofu Plan
         run: tofu plan -out=tfplan
 
+        # This applies the changes to the infrastructure based on the plan file tfplan
       - name: Tofu Apply
         run: tofu apply -auto-approve tfplan
