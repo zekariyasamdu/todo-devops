@@ -19,7 +19,7 @@ COPY --from=deps /app ./
 RUN yarn workspace ${APP_NAME} run build 
 
 FROM base AS api-runner
-ARG APP_NAME=api
+ARG APP_NAME
 WORKDIR /app
 COPY --from=builder --chown=appuser:nodejs /app/package.json /app/yarn.lock /app/.yarnrc.yml ./
 COPY --from=builder --chown=appuser:nodejs /app/apps/api ./apps/api
