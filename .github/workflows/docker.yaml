@@ -50,11 +50,8 @@ jobs:
           context: .
           file: Dockerfile
           target: api-runner
-          build-args: |
-            APP_NAME=api
           push: true
-          tags:
-            | # produce two tags for the image: one with the commit SHA and one with "latest"
+          tags: |
             ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/backend:${{ env.IMAGE_TAG }}
             ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/backend:latest
           cache-from: type=gha # so that the cache can be reused in future builds.
